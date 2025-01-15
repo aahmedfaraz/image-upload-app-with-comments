@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, ChangeEvent, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 // import Image from 'next/image'; // Uncomment if you choose to use Next.js Image component
 
 interface Image {
@@ -222,7 +223,7 @@ export default function ImageUploadAndComments() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {images.map((image, index) => (
-            <div className="flex items-start justify-center">
+            <div key={uuidv4()} className="flex items-start justify-center">
               <div key={image.id} className="border rounded p-4">
                 {/* <img
                 src={image.url}
@@ -273,7 +274,7 @@ export default function ImageUploadAndComments() {
                   ) : (
                     <ul className="mt-4">
                       {image?.comments?.sort((com1, com2) => new Date(com2.createdAt).getTime() - new Date(com1.createdAt).getTime()).map((comment) => (
-                        <li key={comment.id} className="mb-2 p-2 border rounded">
+                        <li key={uuidv4()} className="mb-2 p-2 border rounded">
                           <p>{comment.content}</p>
                           <span className="text-xs text-gray-500">
                             {new Date(comment.createdAt).toLocaleString()}
